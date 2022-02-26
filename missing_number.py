@@ -1,4 +1,4 @@
-# Write a function that returns the missing number in the array. Complexity of O(N) required.
+# Write a function that returns the missing number in the list. Complexity of O(N) required.
 
 # Example:
 # nums = [0, 1, 2, 4, 5]
@@ -6,23 +6,21 @@
 
 ############################################################
 # Approach: 
-# Create a new set with the array passed in.
-# Iterate through the set, checking
-# to see if each number for the length of the array +1
-# exists in the set. If the number does not exist, 
-# return the number
+# Iterate through the list, checking to see if each number for the length of the list +1 exists in the list. 
+# If the number does not exist, return the number
 ############################################################
 
 def missing_number(nums):
-    num_set = set(nums)
     n = len(nums) + 1
     for number in range(n):
-        if number not in num_set:
+        if number not in nums:
             return number
 
-
 nums = [0, 1, 2, 4, 5]
-print(missing_number(nums))
+print('Expecting 3')
+print('Output =', missing_number(nums))
+print('')
 
 nums = [1, 2, 3, 4]
-print(missing_number(nums))
+print('Expecting 0')
+print('Output =', missing_number(nums))

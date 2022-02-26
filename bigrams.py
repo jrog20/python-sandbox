@@ -51,5 +51,4 @@ def find_bigrams(sentence):
 
     return bigram_list
 
-print("This is working")
 print(find_bigrams(sentence))

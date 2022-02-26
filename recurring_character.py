@@ -6,13 +6,13 @@
 
 # Example 1:
 # Input:
-# input = "interviewquery"
+# input = "fantastic"
 # Output:
-# output = "i"
+# output = "a"
 
 # Example 2:
 # Input:
-# input = "interv"
+# input = "uncopyrightable"
 # Output:
 # output = None
 
@@ -27,5 +27,11 @@ def recurring_char(input):
     return None
 
 input = "fantastic"
+print('Expecting: a')
+print('Output:', recurring_char(input))
+print('')
 
-print(recurring_char(input))
+input = "uncopyrightable"
+print('Expecting: None')
+print('Output:', recurring_char(input))
+print('')

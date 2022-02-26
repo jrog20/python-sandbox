@@ -14,16 +14,19 @@ def palindrome(string):
 
 string = 'carerac'
 print('Expect: True')
-print(palindrome(string))
+print('Output:', palindrome(string))
+print('')
 
 string = 'helloh'
 print('Expect: False')
-print(palindrome(string))
+print('Output:', palindrome(string))
+print('')
 
 string = 'jfdkjlfds'
 print('Expect: False')
-print(palindrome(string))
+print('Output:', palindrome(string))
+print('')
 
 string = 'scarpepracs'
 print('Expect: True')
-print(palindrome(string))
+print('Output:', palindrome(string))
