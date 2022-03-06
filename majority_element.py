@@ -13,6 +13,7 @@
 # Input: nums = [2,2,1,1,1,2,2]
 # Output: 2
 
+#########################################################################################
 # Brute force
 # Time complexity : O(n^2)
 # The brute force algorithm contains two nested for loops that each run for nn iterations, 
@@ -21,13 +22,26 @@
 # Space complexity : O(1)
 # The brute force solution does not allocate additional space proportional to the input size.
 
-def majority_element(nums):
-    majority_count = len(nums)//2
-    for num in nums:
-        count = sum(1 for elem in nums if elem == num)
-        if count > majority_count:
-            return num
+# def majority_element(nums):
+#     majority_count = len(nums)//2
+#     for num in nums:
+#         count = sum(1 for elem in nums if elem == num)
+#         if count > majority_count:
+#             return num
 
+#########################################################################################
+# Hashmap solution
+# Time complexity : O(n)
+# Space complexity : O(n)
+
+import collections
+from collections import Counter
+
+def majority_element(nums):
+    counts = collections.Counter(nums)
+    return max(counts.keys(), key=counts.get)
+
+#########################################################################################
 nums = [3,2,3]
 print('Expecting: 3')
 print('Output:', majority_element(nums))
