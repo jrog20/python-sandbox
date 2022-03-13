@@ -22,24 +22,43 @@ import math
 
 #########################################################################################
 # Brute force solution
+# Time complexity: O(N^2)
+# Space complexity: O(1)
+
+# def maximum_subarray(nums):
+#     # initialize a variable to keep track of the best subarray
+#     # set it to negative infinity (not 0), because it is possible that the nums array only
+#     # has negative numbers
+#     max_subarray = -math.inf
+#     # nested for loop: iterate over the nums array, starting with one element
+#     # and for each element, loop through the array from that element, through to the end
+#     # of the array, each time adding the value and updating the current subarray.
+#     for i in range(len(nums)):
+#         current_subarray = 0
+#         for j in range(i, len(nums)):
+#             current_subarray += nums[j]
+#             # Continuously update max_subarray to contain the maximum out of current_subarray and itself.
+#             max_subarray = max(current_subarray, max_subarray)
+#     # return max_subarray
+#     return max_subarray
+#########################################################################################
+# More optimal solution
+# Time complexity: O(N)
+# Space complexity: O(1)
+
 def maximum_subarray(nums):
-    # initialize a variable to keep track of the best subarray
-    # set it to negative infinity (not 0), because it is possible that the nums array only
-    # has negative numbers
-    max_subarray = -math.inf
-    # nested for loop: iterate over the nums array, starting with one element
-    # and for each element, loop through the array from that element, through to the end
-    # of the array, each time adding the value and updating the current subarray.
-    for i in range(len(nums)):
-        cur_subarray = 0
-        for j in range(i, len(nums)):
-            cur_subarray += nums[j]
-            # Continuously update max_subarray to contain the maximum out of current_subarray and itself.
-            max_subarray = max(cur_subarray, max_subarray)
-    # return max_subarray
+    # initialize two variables, both set equal to the first element in the array
+    # current_subarray will keep track of the running total of the current subarray we are working on
+    # max_subarray will be returned, and continuously updated when we find a larger subarray
+    current_subarray = max_subarray = nums[0]
+    # iterate through the array, starting with the second element
+    for num in nums[1:]:
+    # For each element, add it to current_subarray - If current_subarray encounters a negative number,
+    # we don't want it, so we don't add it to current_subarray.
+        current_subarray = max(num, current_subarray + num)
+        max_subarray = max(max_subarray, current_subarray)
     return max_subarray
 #########################################################################################
-
 nums = [-2,1,-3,4,-1,2,1,-5,4]
 print('Expecting: 6')
 print('Output:', maximum_subarray(nums))
