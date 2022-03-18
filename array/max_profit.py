@@ -32,16 +32,39 @@
 # Time complexity: O(n^2)
 # Space complexity: O(1)
 
-def max_profit(prices):
-    max_profit = 0
-    for i in range(len(prices) - 1):
-        for j in range(i + 1, len(prices)):
-            if prices[i] < prices[j]:
-                profit = prices[j] - prices[i]
-                max_profit = max(max_profit, profit)
-    return max_profit
+# def max_profit(prices):
+#     max_profit = 0
+#     for i in range(len(prices) - 1):
+#         for j in range(i + 1, len(prices)):
+#             if prices[i] < prices[j]:
+#                 profit = prices[j] - prices[i]
+#                 max_profit = max(max_profit, profit)
+#     return max_profit
 
 ################################################################################################
+# One pass solution:
+
+# We can iterate over the given array once, keeping track of the largest number following the
+# smallest number. 
+
+# We can initiate two variables, min_price and max_profit, to keep track of the lowest buy price
+# and the maximum profit seen so far.
+
+# Time complexity: O(n)
+# Space complexity: O(1)
+
+def max_profit(prices):
+    min_price = prices[0]
+    max_profit = 0
+    for i in range(len(prices)):
+        # if current element is less than min_price, make min_price equal to the current element
+        if prices[i] < min_price:
+            min_price = prices[i]
+        # if current element - min_price is greater than max_profit, make max_profit equal to the
+        # current best profit found
+        elif prices[i] - min_price > max_profit:
+            max_profit = prices[i] - min_price
+    return max_profit
 
 ################################################################################################
 prices = [7,1,5,3,6,4]
