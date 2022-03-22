@@ -31,6 +31,7 @@
 
 # Time complexity: O(n^2)
 # Space complexity: O(1)
+################################################################################################
 
 # def max_profit(prices):
 #     max_profit = 0
@@ -52,6 +53,7 @@
 
 # Time complexity: O(n)
 # Space complexity: O(1)
+################################################################################################
 
 def max_profit(prices):
     min_price = prices[0]
@@ -67,6 +69,7 @@ def max_profit(prices):
     return max_profit
 
 ################################################################################################
+
 prices = [7,1,5,3,6,4]
 print('Expecting 5')
 print(max_profit(prices))
