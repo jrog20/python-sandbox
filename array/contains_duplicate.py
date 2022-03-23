@@ -18,6 +18,10 @@
 ################################################################################################
 # Put the nums array into a set. If the set is shorter than the the nums array, there is a duplicate
 # so return True, otherwise return False.
+
+# Time completxity: O(n)
+# Space complexity: O(n)
+
 def contains_duplicate(nums):
     num_set = set(nums)
     return True if len(num_set) < len(nums) else False
