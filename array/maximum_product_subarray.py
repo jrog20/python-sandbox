@@ -18,6 +18,29 @@
 # Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
 
 #########################################################################################
+# Brute force approach: 
+# For each element in nums, we accumulate the products of contiguous subarrays starting 
+# from that element to subsequent elements
+
+# Time complexity: O(n^2) - we are checking every possible contiguous subarray following
+# every element in nums so we have quadratic runtime.
+# Space complexity: O(1)
+
+def max_product(nums):
+    if len(nums) == 0:
+        return 0
+
+    result = nums[0]
+
+    for i in range(len(nums)):
+        accumulate = 1
+        for j in range(i, len(nums)):
+            accumulate *= nums[j]
+            result = max(result, accumulate)
+
+    return result
+
+#########################################################################################
 # Iterate through the array. As we iterate, keep track of largest product.
 # If next element makes product less than previous product, start current_product over
 # with the current index.
@@ -25,8 +48,8 @@
 # Time complexity: 
 # Space complexity: 
 
-def max_product(nums):
-    return nums
+# def max_product(nums):
+#     return nums
 #########################################################################################
 
 #########################################################################################
