@@ -26,31 +26,54 @@
 # every element in nums so we have quadratic runtime.
 # Space complexity: O(1)
 
-def max_product(nums):
-    if len(nums) == 0:
-        return 0
+# def max_product(nums):
+#     if len(nums) == 0:
+#         return 0
 
-    result = nums[0]
+#     result = nums[0]
 
-    for i in range(len(nums)):
-        accumulate = 1
-        for j in range(i, len(nums)):
-            accumulate *= nums[j]
-            result = max(result, accumulate)
+#     for i in range(len(nums)):
+#         accumulate = 1
+#         for j in range(i, len(nums)):
+#             accumulate *= nums[j]
+#             result = max(result, accumulate)
 
-    return result
+#     return result
 
 #########################################################################################
 # Iterate through the array. As we iterate, keep track of largest product.
 # If next element makes product less than previous product, start current_product over
 # with the current index.
 
-# Time complexity: 
-# Space complexity: 
+# Time complexity: O(n)
+# Space complexity: O(1)
 
-# def max_product(nums):
-#     return nums
-#########################################################################################
+def max_product(nums):
+    if len(nums) == 0:
+        return 0
+
+    # initialize variables
+    max_so_far = nums[0]
+    min_so_far = nums[0]
+    result = max_so_far
+
+    # iterate through the nums array from the next element (index 1) to end of array
+    for i in range(1, len(nums)):
+        # Keep track of three variables:
+        # 1. The current element
+        curr = nums[i]
+        # 2. The maximum so far of:
+            # 1. the current element (this will account for encountering a 0 or negative number)
+            # 2. maximum so far * current element (if all positive numbers, and therefore continuously increasing)
+            # 3. minimum so far * current element (when a second negative number is encountered)
+        max_so_far = max(curr, max_so_far * curr, min_so_far * curr)
+        # 3. We must keep track of the minimum so far in order to account for the posibility of
+        # encountering a second negative number, which would then possibly make it the max result
+        min_so_far = min(curr, max_so_far * curr, min_so_far * curr)
+
+        result = max(max_so_far, result)
+
+    return result
 
 #########################################################################################
 nums = [2,3,-2,4]
@@ -59,4 +82,8 @@ print('Output:', max_product(nums))
 
 nums = [-2,0,-1]
 print('Expecting: 0')
+print('Output:', max_product(nums))
+
+nums = [2,-5,3,1,-4,0,-10,2,8]
+print('Expecting: 120')
 print('Output:', max_product(nums))
