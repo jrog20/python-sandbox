@@ -30,8 +30,15 @@
 # Explanation: The original array was [11,13,15,17] and it was rotated 4 times
 
 ################################################################################################
+# Brute force solution: Iterate through the array and find the smallest element
+# Time complexity: O(n)
+# Space complexity: O(1)
+
 def find_min(nums):
-    return nums
+    smallest = nums[0]
+    for i in range(1, len(nums)):
+        smallest = min(smallest, nums[i])
+    return smallest
 
 ################################################################################################
 
