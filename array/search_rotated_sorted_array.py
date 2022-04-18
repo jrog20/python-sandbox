@@ -25,6 +25,68 @@
 # Output: -1
 
 ################################################################################################
+# One-pass Binary Search - two pointers
+
+# Time complexity: O(logN)
+# Space complexity: O(1) 
+
+# instead of going through the input array in two passes, we could go through it in one pass 
+# with some conditional checks to better narrow down the scope of the search
+
+# Keep two pionters: start and end. At each iteration, cut the search scope in half by moving
+# either the start or end pointer to the middle (mid) of the previous search scope.
+
+def search(nums, target):
+    # initiate the pointers
+    start = 0
+    end = len(nums) -1
+    # binary search
+    while start <= end:
+        mid = (start + end) // 2
+        # if value of mid index == target, we found the target
+        if nums[mid] == target:
+            return mid
+        # if pivot element is larger than the first element in nums array, the first half
+        # of the array is non-rotated
+        elif nums[mid] > nums[start]:
+            # if target is located in the non-rotated subarray (left side), move the end pointer 
+            # one index to the left
+            if target >= nums[start] and target <= nums[mid]:
+                end = mid - 1
+            # otherwise move the search scope to the right half of the array
+            else:
+                start = mid + 1
+        # if we are here, the pivot element is smaller than the fist element of the array, i.e.
+        # the rotation_index is between index 0 and mid.
+        else:
+            # if target is located in the non-rotated subarray (right side), set the start pointer 
+            # to mid + 1 and search the right side of the array
+            if target >= nums[mid] and target <= nums[end]:
+                start = mid + 1
+            # otherwise the target is located in the left subarray, so we move the end pointer to mid - 1
+            else:
+                end = mid - 1
+
+    # if we get here, the target is not found, so we return -1
+    return -1
+
+################################################################################################
+nums = [4,5,6,7,0,1,2]
+target = 0
+print('Expecting 4')
+print(search(nums, target))
+
+nums = [4,5,6,7,0,1,2]
+target = 3
+print('Expecting -1')
+print(search(nums, target))
+
+nums = [1]
+target = 0
+print('Expecting -1')
+print(search(nums, target))
+
+################################################################################################
 # You must write an algorithm with O(log n) runtime complexity.
 # This requirement hints at using a binary search
 # 1. Find a rotation_index, the index of the smallest element in the array.
@@ -90,64 +152,3 @@
 #         return search_index(rotate_index, len(nums) -1)
 #     # search the left side
 #     return search_index(0, rotate_index)
-################################################################################################
-# One-pass Binary Search - two pointers
-
-# Time complexity: O(logN)
-# Space complexity: O(1) 
-
-# instead of going throgh the input array in two passes, we could go through it in one pass 
-# with some conditional checks to better narrow down the scope of the search
-
-# Keep two pionters: start and end. At each iteration, cut the search scope in half by moving
-# either the start or end pointer to the middle (mid) of the previous search scope.
-
-def search(nums, target):
-    # initiate the pointers
-    start = 0
-    end = len(nums) -1
-    # binary search
-    while start <= end:
-        mid = (start + end) // 2
-        # if value of mid index == target, we found the target
-        if nums[mid] == target:
-            return mid
-        # if pivot element is larger than the first element in nums array, the first half
-        # of the array is non-rotated
-        elif nums[mid] > nums[start]:
-            # if target is located in the non-rotated subarray (left side), move the end pointer 
-            # one index to the left
-            if target >= nums[start] and target <= nums[mid]:
-                end = mid - 1
-            # otherwise move the search scope to the right half of the array
-            else:
-                start = mid + 1
-        # if we are here, the pivot element is smaller than the fist element of the array, i.e.
-        # the rotation_index is between index 0 and mid.
-        else:
-            # if target is located in the non-rotated subarray (right side), set the start pointer 
-            # to mid + 1 and search the right side of the array
-            if target >= nums[mid] and target <= nums[end]:
-                start = mid + 1
-            # otherwise the target is located in the left subarray, so we move the end pointer to mid - 1
-            else:
-                end = mid - 1
-
-    # if we get here, the target is not found, so we return -1
-    return -1
-
-################################################################################################
-nums = [4,5,6,7,0,1,2]
-target = 0
-print('Expecting 4')
-print(search(nums, target))
-
-nums = [4,5,6,7,0,1,2]
-target = 3
-print('Expecting -1')
-print(search(nums, target))
-
-nums = [1]
-target = 0
-print('Expecting -1')
-print(search(nums, target))
