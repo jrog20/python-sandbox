@@ -105,19 +105,18 @@
 # Hashset solution
 
 # Two Sum uses a hashmap to find complement values, and therefore achieves O(n) time complexity.
+
 # First, we sort the nums array
 # Then interate through the array
 # Again, if the first element is greater than 0, break because adding two positive numbers can
 # not sum to zero.
 # And skip duplicate numbers
 
-
-# add the first element in the nums array to the hash
-# loop through the nums array
-# for every element, check to see if its value plus the value of any other element
-# in the nums array is the opposite of a value in the hash
-# if yes, add to the results array
-# add the current element to the hash and continue iterating through the array
+# In the two_sum function:
+# iterate through the array looking for a complement to nums[i] + nums[j]
+# if the complement exists in the seen hashset, we found a triplet:
+# add it to the results array and increment j while the next value is the same (avoid duplicates)
+# add the current j element to the hash and continue iterating through the array
 
 def three_sum(nums):
     # sort the nums array
