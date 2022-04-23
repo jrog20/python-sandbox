@@ -17,8 +17,53 @@
 # Input: nums = [0]
 # Output: []
 ##########################################################################
+# Two Sum uses a hashmap to find complement values, and therefore achieves O(n) time complexity.
+# Two Sum II uses the two pointers pattern and also has O(n) time complexity for a sorted array.
+# We can use this approach for any array if we sort it first, which bumps the time complexity to O(nlogn).
+
+# Time complexity: O(n^2) - We are calling two_sum n times from our main function, which is running n times.
+# Space complexity: O(nlogn) - The sorting function
+
 def three_sum(nums):
-    pass
+    # sort the nums array
+    nums.sort()
+    # initiate results array
+    results = []
+    # iterate through the array
+    for i in range(len(nums)):
+        # if the current value is greater than 0, break from the loop as the remaining values
+        # cannot sum to 0
+        if nums[i] > 0:
+            break
+        # if the current value is the same as the value before, skip it
+        elif nums[i] == nums[i - 1]:
+            break
+        # otherwise, call two_sum function on the current nums index
+        else:
+            two_sum(nums, i, results)
+    return results
+
+def two_sum(nums, i, results):
+    left = i + 1
+    right = len(nums) - 1
+    # with three pointers, find if i + left + right == 0
+    while left < right:
+        # if nums[i] + nums[left] + nums[right] < 0, increase left by 1
+        if nums[i] + nums[left] + nums[right] < 0:
+            left += 1
+        # if nums[i] + nums[left] + nums[right] > 0, decrease right by 1
+        elif nums[i] + nums[left] + nums[right] > 0:
+            right -= 1
+        # if the three == 0, we found a triplet. 
+        # 1. add it to the result array 
+        # 2. increase left by 1 (and skip if next value is the same as current value)
+        # 3. decrease right by 1
+        else:
+            results.append([nums[i], nums[left], nums[right]])
+            left += 1
+            while left == left - 1:
+                left += 1
+            right -= 1
 
 ##########################################################################
 nums = [-1,0,1,2,-1,-4]
