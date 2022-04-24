@@ -63,48 +63,12 @@
 #             while left == left - 1:
 #                 left += 1
 #             right -= 1
-##########################################################################
-# One function
-# def three_sum(nums):
-#     # sort the nums array
-#     nums.sort()
-#     # initiate results array
-#     results = []
-#     # iterate through the array
-#     for i in range(len(nums)):
-#         # if the current value is greater than 0, break from the loop as the remaining values cannot sum to 0
-#         # or if the current value is the same as the value before, skip it
-#         if nums[i] > 0 or nums[i] == nums[i - 1]:
-#             break
-#         # otherwise, establish two pointers and search the array to see if there are two #s that will 
-#         # combine with current index to equal 0
-#         else:
-#             left = i + 1
-#             right = len(nums) - 1
-#             # with three pointers, find if i + left + right == 0
-#             while left < right:
-#                 # if nums[i] + nums[left] + nums[right] < 0, increase left by 1
-#                 if nums[i] + nums[left] + nums[right] < 0:
-#                     left += 1
-#                 # if nums[i] + nums[left] + nums[right] > 0, decrease right by 1
-#                 elif nums[i] + nums[left] + nums[right] > 0:
-#                     right -= 1
-#                 # if the three == 0, we found a triplet. 
-#                 # 1. add it to the result array 
-#                 # 2. increase left by 1 (and skip if next value is the same as current value)
-#                 # 3. decrease right by 1
-#                 else:
-#                     results.append([nums[i], nums[left], nums[right]])
-#                     left += 1
-#                     while left == left - 1:
-#                         left += 1
-#                     right -= 1
-#     return results    
 
 ##########################################################################
 # Hashset solution
-
-# Two Sum uses a hashmap to find complement values, and therefore achieves O(n) time complexity.
+# Time Complexity: O(n^2)-twoSum is O(n), and we call it n times.
+# Sorting the array takes O(nlogn), so overall complexity is O(nlogn + n^2), so O(n^2)
+# Space Complexity: O(n) for the hashset
 
 # First, we sort the nums array
 # Then interate through the array
@@ -150,7 +114,7 @@ def two_sum(nums, i, results):
 
 ##########################################################################
 nums = [-1,0,1,2,-1,-4]
-print('Expecting: [[-1,-1,2],[-1,0,1]]')
+print('Expecting: [[-1,1,0], [-1,2,-1]]')
 print('This is the solution:', three_sum(nums))
 
 nums = []
@@ -160,3 +124,41 @@ print('This is the solution:', three_sum(nums))
 nums = [0]
 print('Expecting: []')
 print('This is the solution:', three_sum(nums))
+
+##########################################################################
+# One function
+# def three_sum(nums):
+#     # sort the nums array
+#     nums.sort()
+#     # initiate results array
+#     results = []
+#     # iterate through the array
+#     for i in range(len(nums)):
+#         # if the current value is greater than 0, break from the loop as the remaining values cannot sum to 0
+#         # or if the current value is the same as the value before, skip it
+#         if nums[i] > 0 or nums[i] == nums[i - 1]:
+#             break
+#         # otherwise, establish two pointers and search the array to see if there are two #s that will 
+#         # combine with current index to equal 0
+#         else:
+#             left = i + 1
+#             right = len(nums) - 1
+#             # with three pointers, find if i + left + right == 0
+#             while left < right:
+#                 # if nums[i] + nums[left] + nums[right] < 0, increase left by 1
+#                 if nums[i] + nums[left] + nums[right] < 0:
+#                     left += 1
+#                 # if nums[i] + nums[left] + nums[right] > 0, decrease right by 1
+#                 elif nums[i] + nums[left] + nums[right] > 0:
+#                     right -= 1
+#                 # if the three == 0, we found a triplet. 
+#                 # 1. add it to the result array 
+#                 # 2. increase left by 1 (and skip if next value is the same as current value)
+#                 # 3. decrease right by 1
+#                 else:
+#                     results.append([nums[i], nums[left], nums[right]])
+#                     left += 1
+#                     while left == left - 1:
+#                         left += 1
+#                     right -= 1
+#     return results    
