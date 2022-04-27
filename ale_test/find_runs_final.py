@@ -1,14 +1,8 @@
 # Write a python3 function:
-
-# def solution(A, Y)
-
 # that accepts as arguments a list of integers and an integer run length. 
 # It must find in that list all runs of run length consecutive numbers that 
 # increase or decrease by 1. It should return the list indices of the first element of each run. 
 # If there are no consecutive runs it should return an empty list.
-
-# Feel free to rename the arguments in the function signature, 
-# e.g.: def solution(values, run_length):
 
 # Example: 
 # values=[1, 2, 3, 5, 10, 9, 8, 9, 10, 11, 7, 8, 7]
@@ -32,10 +26,10 @@ def solution(values, run_length):
         while counter < run_length-1:
             if values[temp_index] - values[temp_index+1] == -1:
                 increase_array.append(i)
-                if len(increase_array) == run_length-1:
-                    solution_array.append(increase_array[0])
                 counter += 1
                 temp_index += 1
+                if len(increase_array) == run_length-1:
+                    solution_array.append(increase_array[0])
             elif values[temp_index] - values[temp_index+1] == 1:
                 decrease_array.append(i)
                 counter += 1
