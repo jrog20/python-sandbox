@@ -11,34 +11,73 @@
 
 # Additionally, please give comments on the code's runtime and space complexity. 
 ##########################################################################
-# Time complexity: O(n)
+# Time complexity: O(n^2)
+# Space complexity: O(n)
+
+# def solution(values, run_length):
+#     solution_array = []
+#     if run_length == 0:
+#         return solution_array
+#     if run_length == 1:
+#         for i in range(len(values)):
+#             solution_array.append(i)
+#         return solution_array
+#     for i in range(len(values)-run_length+1):
+#         counter = 0
+#         increase_array = []
+#         decrease_array = []
+#         run_index = i
+#         while counter < run_length-1:
+#             if values[run_index] - values[run_index+1] == -1:
+#                 increase_array.append(i)
+#                 counter += 1
+#                 run_index += 1
+#                 if len(increase_array) == run_length-1:
+#                     solution_array.append(increase_array[0])
+#             elif values[run_index] - values[run_index+1] == 1:
+#                 decrease_array.append(i)
+#                 counter += 1
+#                 run_index += 1
+#                 if len(decrease_array) == run_length-1:
+#                     solution_array.append(decrease_array[0])
+#             else:
+#                 counter += 1
+#                 run_index += 1
+#     return solution_array
+##########################################################################
+# With variable counters instead of increase and decrease arrays
+# Time complexity: O(n^2)
 # Space complexity: O(n)
 
 def solution(values, run_length):
     solution_array = []
-    # Need to add +1 to range in order to get any potential runs at the end of array
-    # i.e. I originally stopped the loop one index short
+    if run_length == 0:
+        return solution_array
+    if run_length == 1:
+        for i in range(len(values)):
+            solution_array.append(i)
+        return solution_array
     for i in range(len(values)-run_length+1):
         counter = 0
-        increase_array = []
-        decrease_array = []
-        temp_index = i
+        increase = 0
+        decrease = 0
+        run_index = i
         while counter < run_length-1:
-            if values[temp_index] - values[temp_index+1] == -1:
-                increase_array.append(i)
+            if values[run_index] - values[run_index+1] == -1:
+                increase += 1
                 counter += 1
-                temp_index += 1
-                if len(increase_array) == run_length-1:
-                    solution_array.append(increase_array[0])
-            elif values[temp_index] - values[temp_index+1] == 1:
-                decrease_array.append(i)
+                run_index += 1
+                if increase == run_length-1:
+                    solution_array.append(i)
+            elif values[run_index] - values[run_index+1] == 1:
+                decrease += 1
                 counter += 1
-                temp_index += 1
-                if len(decrease_array) == run_length-1:
-                    solution_array.append(decrease_array[0])
+                run_index += 1
+                if decrease == run_length-1:
+                    solution_array.append(i)
             else:
                 counter += 1
-                temp_index += 1
+                run_index += 1
     return solution_array
 ##########################################################################
 
@@ -47,7 +86,6 @@ run_length = 3
 print('Expecting: [0, 4, 6, 7]')
 print('This is the solution:', solution(values, run_length))
 
-# Original submitted code didn't work for a run starting at the last possible index
 values = [1, 2, 3, 5, 10, 9, 8, 9, 10, 11, 7, 8, 9]
 run_length = 3 
 print('Expecting: [0, 4, 6, 7, 10]')
@@ -76,4 +114,19 @@ print('This is the solution:', solution(values, run_length))
 values = [-1, -2, -3, -4, -5]
 run_length = 5
 print('Expecting: [0]')
+print('This is the solution:', solution(values, run_length))
+
+values = [0, -2, 7, -4, 9]
+run_length = 1
+print('Expecting: [0, 1, 2, 3, 4]')
+print('This is the solution:', solution(values, run_length))
+
+values = [-1, -2, -3, -4, -5]
+run_length = 0
+print('Expecting: []')
+print('This is the solution:', solution(values, run_length))
+
+values = [0, -2, -3, -4, 8]
+run_length = 2
+print('Expecting: [1, 2]')
 print('This is the solution:', solution(values, run_length))
