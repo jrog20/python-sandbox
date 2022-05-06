@@ -17,82 +17,38 @@
 
 # Additionally, please give comments on the code's runtime and space complexity. 
 ##########################################################################
-# Two Pointer solution:
-
-# Initiate two pointers: 
-# pointer_one will point to the beginning of the possible subarray
-# pointer_two will point to the end of the possible subarray
-# Iterate through the possible subarray
-# Start with last element in the subarray, and compare it to the previous element
-# If it increases or decreases by 1, add the pointer_one index to the increase_array or decrease_array
-# If this temp array gets to the same length as the run_length, we add pointer_one index
-# to the solution_array
-
-# Time complexity: O(n)
-# Space complexity: O(1)
+# Time complexity: O(n^2)
+# Space complexity: O(n)
 
 def solution(values, run_length):
     solution_array = []
-
-    # return empty array if run length is greater than array length
-    if len(values) < run_length:
+    if run_length == 0:
         return solution_array
-
-    pointer_one = 0
-    pointer_two = run_length
-    increase_array = []
-    decrease_array = []
-
-    while pointer_one <= pointer_two - 1 and pointer_two < len(values):
-        # print('beginning of loop pointer two is = ', pointer_two)
-        # increasing temp array
-        if values[pointer_two - 1] - values[pointer_two - 2] == 1 or values[pointer_two] - values[pointer_one] == 1:
-            increase_array.append(pointer_one)
-            print('pointer_one value = ', pointer_one)
-            print('pointer_two value = ', pointer_two)
-            print('increase_array = ', increase_array)
-            # If we get here, the subarray matches our requirements and we
-            # add the index of pointer_one to the solution array
-            if len(increase_array) == run_length:
-                solution_array.append(pointer_one)
-                print('solution array = ', solution_array)
-                # reset the increase_array
-                increase_array = []
-                # increment pointer_one by one
-                pointer_one += 1
-                # pointer_two needs to be run length from pointer_one
-                pointer_two = pointer_one + run_length
+    if run_length == 1:
+        for i in range(len(values)):
+            solution_array.append(i)
+        return solution_array
+    for i in range(len(values)-run_length+1):
+        counter = 0
+        increase_array = []
+        decrease_array = []
+        run_index = i
+        while counter < run_length-1:
+            if values[run_index] - values[run_index+1] == -1:
+                increase_array.append(i)
+                counter += 1
+                run_index += 1
+                if len(increase_array) == run_length-1:
+                    solution_array.append(increase_array[0])
+            elif values[run_index] - values[run_index+1] == 1:
+                decrease_array.append(i)
+                counter += 1
+                run_index += 1
+                if len(decrease_array) == run_length-1:
+                    solution_array.append(decrease_array[0])
             else:
-                # If the last element and 2nd to last element differ by 1,
-                # move pointer_two one index to left
-                pointer_two -= 1
-        # decreasing temp array
-        elif values[pointer_two - 1] - values[pointer_two - 2] == -1 or values[pointer_two] - values[pointer_one] == -1:
-            decrease_array.append(pointer_one)
-            print('pointer_one value = ', pointer_one)
-            print('pointer_two value = ', pointer_two)
-            print('decrease_array = ', decrease_array)
-            # If we get here, the subarray matches our requirements and we
-            # add the index of pointer_one to the solution array
-            if len(decrease_array) == run_length:
-                solution_array.append(pointer_one)
-                print('solution array = ', solution_array)
-                # reset the decrease_array
-                decrease_array = []
-                print('increase array = ', decrease_array)
-                # increment pointer_one by one
-                pointer_one += 1
-                # pointer_two needs to be run length from pointer_one
-                pointer_two = pointer_one + run_length
-            else:
-                # If the last element and 2nd to last element differ by 1,
-                # move pointer_two one index to left
-                pointer_two -= 1
-        else:
-            # If we get here, we don't have a current run, so we need to move pointer_one one index to the right
-            # and we need to reset pointer_two to be run length from pointer_one
-            pointer_one += 1
-            pointer_two = pointer_one + run_length 
+                counter += 1
+                run_index += 1
     return solution_array
     
 ##########################################################################
