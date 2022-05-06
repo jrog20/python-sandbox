@@ -14,44 +14,9 @@
 # Time complexity: O(n^2)
 # Space complexity: O(n)
 
-# def solution(values, run_length):
-#     solution_array = []
-#     if run_length == 0:
-#         return solution_array
-#     if run_length == 1:
-#         for i in range(len(values)):
-#             solution_array.append(i)
-#         return solution_array
-#     for i in range(len(values)-run_length+1):
-#         counter = 0
-#         increase_array = []
-#         decrease_array = []
-#         run_index = i
-#         while counter < run_length-1:
-#             if values[run_index] - values[run_index+1] == -1:
-#                 increase_array.append(i)
-#                 counter += 1
-#                 run_index += 1
-#                 if len(increase_array) == run_length-1:
-#                     solution_array.append(increase_array[0])
-#             elif values[run_index] - values[run_index+1] == 1:
-#                 decrease_array.append(i)
-#                 counter += 1
-#                 run_index += 1
-#                 if len(decrease_array) == run_length-1:
-#                     solution_array.append(decrease_array[0])
-#             else:
-#                 counter += 1
-#                 run_index += 1
-#     return solution_array
-##########################################################################
-# With variable counters instead of increase and decrease arrays
-# Time complexity: O(n^2)
-# Space complexity: O(n)
-
 def solution(values, run_length):
     solution_array = []
-    if run_length == 0:
+    if run_length == 0 or run_length > len(values):
         return solution_array
     if run_length == 1:
         for i in range(len(values)):
@@ -80,6 +45,11 @@ def solution(values, run_length):
                 run_index += 1
     return solution_array
 ##########################################################################
+
+values = [1, 2]
+run_length = 3 
+print('Expecting: []')
+print('This is the solution:', solution(values, run_length))
 
 values = [1, 2, 3, 5, 10, 9, 8, 9, 10, 11, 7, 8, 7]
 run_length = 3 
