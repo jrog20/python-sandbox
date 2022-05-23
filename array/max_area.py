@@ -28,14 +28,38 @@
 # Time complexity: O(n^2)
 # Space complexity: O(1)
 ########################################################################################
+# def max_area(height):
+#     max_water = 0
+#     for i in range(len(height)):
+#         for j in range(len(height)):
+#             container_length = j - i
+#             container_height = min(height[j], height[i])
+#             area = container_length * container_height
+#             max_water = max(area, max_water)
+#     return max_water
+########################################################################################
+# Two pointer solution:
+# The greatest area will be constrained by the lowest line height, and will be increased
+# by the greater the distance between lines.
+# Using two pointers, we move the pointer of the lower height one closer to the pointer
+# with a higher height.
+
+# Time complexity: O(n)
+# Space complexity: O(1)
+########################################################################################
 def max_area(height):
     max_water = 0
-    for i in range(len(height)):
-        for j in range(len(height)):
-            container_length = j - i
-            container_height = min(height[j], height[i])
-            area = container_length * container_height
-            max_water = max(area, max_water)
+    left = 0
+    right = len(height) -1
+    while right >= left:
+        container_length = right - left
+        container_height = min(height[right], height[left])
+        area = container_length * container_height
+        max_water = max(area, max_water)
+        if height[left] < height[right]:
+            left += 1
+        else:
+            right -= 1
     return max_water
 ########################################################################################
 height = [1,8,6,2,5,4,8,3,7]
