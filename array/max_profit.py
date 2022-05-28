@@ -19,7 +19,7 @@
 # Output: 0
 # Explanation: In this case, no transactions are done and the max profit = 0.
 
-################################################################################################
+# ###############################################################################################
 # Brute force solution:
 
 # We need to find the maximum different (max profit) between two numbers in the array.
