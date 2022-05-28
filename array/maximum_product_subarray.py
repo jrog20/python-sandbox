@@ -63,9 +63,9 @@ def max_product(nums):
         # 1. The current element
         curr = nums[i]
         # 2. The maximum so far of:
-            # 1. the current element (this will account for encountering a 0 or negative number)
-            # 2. maximum so far * current element (if all positive numbers, and therefore continuously increasing)
-            # 3. minimum so far * current element (when a second negative number is encountered)
+        #     1. the current element (this will account for encountering a 0 or negative number)
+        #     2. maximum so far * current element (if all positive numbers, and therefore continuously increasing)
+        #     3. minimum so far * current element (when a second negative number is encountered)
         max_so_far = max(curr, max_so_far * curr, min_so_far * curr)
         # 3. We must keep track of the minimum so far in order to account for the posibility of
         # encountering a second negative number, which would then possibly make it the max result
