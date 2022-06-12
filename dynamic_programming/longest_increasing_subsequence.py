@@ -18,7 +18,7 @@
 # Example 3:
 # Input: nums = [7,7,7,7,7,7,7]
 # Output: 1
-########################################################################################
+# #######################################################################################
 # Dynamic Programming solution:
 # 1. Initialize an array dp with length nums.length and all elements equal to 1. dp[i] represents 
 # the length of the longest increasing subsequence that ends with the element at index i.
@@ -31,15 +31,43 @@
 
 # Time Complexity: O(n^2)
 # Space Complexity: 0(n)
-########################################################################################
+
+# def length_of_LIS(nums):
+#     dp = [1] * len(nums)
+#     for i in range(1, len(nums)):
+#         for j in range(i):
+#             if nums[i] > nums[j]:
+#                 dp[i] = max(dp[i], dp[j] + 1)
+#     return max(dp)
+# #######################################################################################
+# Dynamic Programming - Intelligently build the subsequence:
+# 1. Initialize an array sub which contains the first element of nums.
+
+# 2. Iterate through the input, starting from the second element. For each element num:
+#     - If num is greater than any element in sub, then add num to sub.
+#     - Otherwise, iterate through sub and find the first element that is 
+#     greater than or equal to num. Replace that element with num.
+
+# 3. Return the length of sub.
+
+# Time Complexity: O(n^2)
+# Space Complexity: 0(n)
+
 def length_of_LIS(nums):
-    dp = [1] * len(nums)
-    for i in range(1, len(nums)):
-        for j in range(i):
-            if nums[i] > nums[j]:
-                dp[i] = max(dp[i], dp[j] + 1)
-    return max(dp)
-########################################################################################
+    sub = [nums[0]]
+    for num in nums[1:]:
+        if num > sub[-1]:
+            sub.append(num)
+        else:
+            # iterate through sub and find the first element that is 
+            # greater than or equal to num.
+            i = 0
+            while num > sub[i]:
+                i += 1
+            # Replace that element with num.
+            sub[i] = num
+    return len(sub)
+# #######################################################################################
 nums = [10,9,2,5,3,7,101,18]
 print('Expecting: 4')
 print('Output:', length_of_LIS(nums))
