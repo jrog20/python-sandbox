@@ -53,19 +53,51 @@
 # Time Complexity: O(n^2)
 # Space Complexity: 0(n)
 
+# def length_of_LIS(nums):
+#     sub = [nums[0]]
+#     for num in nums[1:]:
+#         if num > sub[-1]:
+#             sub.append(num)
+#         else:
+#             # iterate through sub and find the first element that is 
+#             # greater than or equal to num.
+#             i = 0
+#             while num > sub[i]:
+#                 i += 1
+#             # Replace that element with num.
+#             sub[i] = num
+#     return len(sub)
+# #######################################################################################
+# Dynamic Programming with Binary Search solution:
+
+# 1. Initialize an array sub which contains the first element of nums.
+
+# 2. Iterate through the input, starting from the second element. For each element num:
+
+    # - If num is greater than any element in sub, then add num to sub.
+    # - Otherwise, perform a binary search in sub to find the smallest element that is greater than 
+    # or equal to num. Replace that element with num.
+
+# 3. Return the length of sub.
+
+# Time Complexity: O(n log n)
+# Space Complexity: 0(n)
+
+from bisect import bisect_left
+
 def length_of_LIS(nums):
     sub = [nums[0]]
     for num in nums[1:]:
-        if num > sub[-1]:
+        i = bisect_left(sub, num)
+
+        # if num is greater than any element in sub
+        if i == len(sub):
             sub.append(num)
+
+        # otherwise replace the first element in sub that is greater than or equal to num
         else:
-            # iterate through sub and find the first element that is 
-            # greater than or equal to num.
-            i = 0
-            while num > sub[i]:
-                i += 1
-            # Replace that element with num.
             sub[i] = num
+
     return len(sub)
 # #######################################################################################
 nums = [10,9,2,5,3,7,101,18]
