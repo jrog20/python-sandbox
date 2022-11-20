@@ -1,0 +1,19 @@
+5 Python Projects to Automate Your Life: From Beginner to Advanced
+https://towardsdatascience.com/5-python-projects-to-automate-your-life-from-beginner-to-advanced-90fe29a7d664 
+Automate Word
+Automate emails
+
+10 Python Automation Scripts for Your Everyday Job
+https://python.plainenglish.io/10-python-automation-scripts-for-your-everyday-job-8ac56e1b4f32 
+Automate Excel - read and write
+Photo editor
+Fetch PDF text
+Scrape Amazon for product information
+Text Summarizer
+Fetch Song Lyrics
+
+Automate 4 Boring Tasks in Python with 5 Lines of Code
+https://medium.com/geekculture/automate-4-boring-tasks-in-python-with-5-lines-of-code-55901b3cd5dc 
+Multiple folder creation
+Extract tables from pdfs
+Extract tables from websites
